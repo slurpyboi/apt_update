@@ -19,7 +19,7 @@ int stackempty()
 { 
      if(top==-1) 
         return 1; 
-      else 
+     else 
         return 0; 
 } 
  
@@ -45,7 +45,7 @@ void display()
     else 
        { 
            for(i=top;i>=0;i--) 
-             printf("\n%d",stack[i]); 
+             printf("\n %d",stack[i]); 
        } 
 } 
  
@@ -91,7 +91,8 @@ void main()
            
           switch(choice) 
           { 
-              case 1:  if (stackfull()==1) 
+              case 1:  
+                       if (stackfull()==1) 
                               printf("\n Stack Overflow");  
                        else 
                           { 
@@ -100,7 +101,8 @@ void main()
                                 push(item); 
                           } 
                         break; 
-             case 2: if(stackempty()==1) 
+             case 2: 
+                     if(stackempty()==1) 
                              printf("\nStack  Underflow");   
                      else 
                             printf("\n Element popped %d",pop()); 
@@ -109,8 +111,10 @@ void main()
                           break; 
              case 4:  palindrome(); 
                           break; 
-             case 5:  exit(0); 
-             default: printf(“Invalid choice”); 
+             case 5:  
+                      exit(0); 
+             default:
+                    printf("Invalid choice"); 
            }   //switch end 
      }//while end      
 }//main end 
