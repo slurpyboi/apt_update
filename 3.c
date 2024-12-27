@@ -1,50 +1,116 @@
-#include<stdio.h> 
-#include<string.h> 
+#include <stdio.h> 
+#include<stdlib.h> 
+#include<math.h> 
+#define maxsize 5 
  
+int stack[maxsize]; 
+int top=-1; 
  
-char str[50], pat[50], rep[50], ans[50]; 
-int i, j, m, k, flag=0; 
- 
-void stringmatch() 
- 
+int stackfull() 
 { 
-       i = m = j = 0; 
-       while(str[m]!= '\0') 
-    { 
-                 if(str[m]==pat[i]) // ...... matching 
-                { 
-                    i++; m++; 
-                     if(pat[i] == '\0') //.....found occurrences. 
-                 { 
-                           flag = 1;
-                            for(k = 0; rep[k] !='\0'; k++ , j++) 
-                                         ans[j] = rep[k]; 
-                                    i = 0; 
-                   
-                } 
-              } 
-        else  
-            
-                 ans[j++] = str[m++]; 
-                   
-       }    //while end 
+   if (top==maxsize-1) 
+      return 1; 
+   else 
+      return 0; 
+} 
  
-    ans[j] = '\0'; 
-}  
+ 
+int stackempty() 
+{ 
+     if(top==-1) 
+        return 1; 
+      else 
+        return 0; 
+} 
+ 
+ 
+void push(int item) 
+{ 
+       stack[++top]=item; 
+} 
+ 
+ 
+int pop() 
+{    
+    return stack[top--]; 
+      
+} 
+ 
+ 
+void display() 
+{ 
+    int i; 
+    if(top==-1) 
+      printf("\nStack Underflow"); 
+    else 
+       { 
+           for(i=top;i>=0;i--) 
+             printf("\n%d",stack[i]); 
+       } 
+} 
+ 
+ 
+void palindrome() 
+{ 
+    int num,i,rem,rev,temp; 
+    printf("\n Enter a number"); 
+    scanf("%d",&num); 
+    temp=num; 
+    while(num!=0) 
+    { 
+         rem=num%10; 
+         push(rem); 
+         num/=10; 
+    } 
+    rev=0, i=0; 
+    while (top!=-1) 
+    { 
+          rev+=pop()*pow(10,i); 
+          i++; 
+    } 
+    if(temp==rev) 
+        printf("\n No is palindrome"); 
+    else 
+       printf("\n No is not a plaidrome"); 
+} 
  
  
 void main() 
 { 
- 
-        printf("\nEnter a main string \n"); 
-        gets(str); 
-        printf("\nEnter a pattern string \n"); 
-        gets(pat); 
-        printf("\nEnter a replace string \n"); 
-        gets(rep); 
-        stringmatch(); 
-        if(flag == 1) 
-                printf("\nThe resultant string is\n %s" , ans); 
-        else 
-                printf("\nPattern string NOT found\n"); 
-}
+      int choice, item; 
+      while(1) 
+      { 
+          printf("\n STACK OPERATIONS\n"); 
+          printf("\n 1. PUSH"); 
+          printf("\n 2. POP"); 
+          printf("\n 3. DISPLAY"); 
+          printf("\n 4. PALINDROME"); 
+          printf("\n 5. EXIT"); 
+          printf("\n \nEnter your choice"); 
+          scanf("%d", &choice); 
+           
+          switch(choice) 
+          { 
+              case 1:  if (stackfull()==1) 
+                              printf("\n Stack Overflow");  
+                       else 
+                          { 
+                                printf("\n Enter element  to pushed"); 
+                                scanf("%d",&item); 
+                                push(item); 
+                          } 
+                        break; 
+             case 2: if(stackempty()==1) 
+                             printf("\nStack  Underflow");   
+                     else 
+                            printf("\n Element popped %d",pop()); 
+                     break; 
+             case 3:  display(); 
+                          break; 
+             case 4:  palindrome(); 
+                          break; 
+             case 5:  exit(0); 
+             default: printf(“Invalid choice”); 
+           }   //switch end 
+     }//while end      
+}//main end 
