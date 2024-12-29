@@ -71,13 +71,11 @@ while(1)
                 printf("\nEnter the source vertex : ");
                 scanf("%d", &source);
                 printf("\n Nodes that are reachable from  source node %d\n", source);   
-                for(v=0;v<n;v++)
-                { 
+                for(v=0;v<n;v++){ 
                     if((a[source][v]==1) &&(visited[v]==0))
                               dfs(v);
-                }
-               break;      
-         case 4:exit(0);
+                } break;      
+         case 4: exit(0);
          default: printf("Invalid choice");
     }        
   }
