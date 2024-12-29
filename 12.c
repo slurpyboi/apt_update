@@ -13,11 +13,11 @@ int n,i;
 void create()
 {
      int num, key, i;
-    int ans = 1;
+    //hash table initialization
     for (i=0; i < tablesize; i++)
             emp[i].flag=0;
  
-        
+        //adding employee
     printf("\nEnter the no of employess");
     scanf("%d",&n);
     for(i=0;i<n;i++)
@@ -34,7 +34,8 @@ void create()
                scanf("%s", &emp[key].name);
         }
         else
-         {        while(emp[key].flag!=0)
+             {      // for collision linear probing
+              while(emp[key].flag!=0)
                                 key=(key+1)%tablesize;
                         
                      emp[key].flag=1;
@@ -45,7 +46,6 @@ void create()
             }
     }
 }
-
 void display()
 {
       printf("\nHashIndex\t\tEmpID\t\tEmpName");
